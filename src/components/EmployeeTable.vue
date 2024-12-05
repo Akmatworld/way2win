@@ -91,7 +91,9 @@ import {NURSE} from '@/helpers/constants'
 import Modal from '@/components/Modal.vue'
 
 import {useEmployee} from '@/compositions/useEmployeeData'
+import {useNotification} from '@/compositions/useToast'
 const {getEmployees, updateEmployee} = useEmployee()
+const { success } = useNotification()
 
 const { position } = defineProps<{
   position: string
@@ -159,6 +161,7 @@ function action (action: Actions, employee: Doctor | Nurse): void {
 
     updateEmployee(newList)
     updateDoctors()
+    success('Successfully deleted')
   } else {
     isEdit.value = true
   }
